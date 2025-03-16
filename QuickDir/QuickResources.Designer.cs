@@ -61,12 +61,40 @@ namespace QuickDir {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to null.
+        /// </summary>
+        internal static string DefaultFolderIcon {
+            get {
+                return ResourceManager.GetString("DefaultFolderIcon", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Icon similar to (Icon).
         /// </summary>
-        internal static System.Drawing.Icon tray_icon {
+        internal static System.Drawing.Icon MissingFileIcon {
             get {
-                object obj = ResourceManager.GetObject("tray_icon", resourceCulture);
+                object obj = ResourceManager.GetObject("MissingFileIcon", resourceCulture);
                 return ((System.Drawing.Icon)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Icon similar to (Icon).
+        /// </summary>
+        internal static System.Drawing.Icon TrayIcon {
+            get {
+                object obj = ResourceManager.GetObject("TrayIcon", resourceCulture);
+                return ((System.Drawing.Icon)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to user.cfg.
+        /// </summary>
+        internal static string UserConfigFile {
+            get {
+                return ResourceManager.GetString("UserConfigFile", resourceCulture);
             }
         }
     }
