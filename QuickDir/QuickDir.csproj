@@ -91,7 +91,9 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
-    <None Include="resources\en_us.loc" />
+    <Content Include="resources\en_us.loc">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <None Include="user.cfg" />
   </ItemGroup>
   <ItemGroup>

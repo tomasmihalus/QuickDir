@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 namespace QuickDir {
     public static class Localizer {
         public static void SetLanguage(string language) {
-            string path = Path.Combine("resources" + $"{language}.loc");
+            string path = Path.Combine("resources", $"{language}.loc");
             if (!File.Exists(path))
                 throw new FileNotFoundException($"Could not find localization file '{path}'.", Path.GetFileName(path));
 

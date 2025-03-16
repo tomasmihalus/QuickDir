@@ -34,7 +34,10 @@ namespace QuickDir {
                 paths = new List<string>() { path };
             }
 
+            paths.Sort();
             File.WriteAllLines(configPath, paths);
+
+            UpdateItems();
         }
 
         private void UpdateItems() {
