@@ -13,7 +13,8 @@ namespace QuickDir {
             if (path is null)
                 throw new ArgumentNullException(nameof(path));
 
-            if (!File.Exists(path) && !Directory.Exists(path)) {
+            bool isDirectory = Directory.Exists(path);
+            if (!isDirectory && !File.Exists(path)) {
                 small = QuickResources.MissingFileIcon.ToBitmap();
                 large = QuickResources.MissingFileIcon.ToBitmap();
                 return;
@@ -23,7 +24,7 @@ namespace QuickDir {
             NativeHelper.SHFILEINFO shinfo = new NativeHelper.SHFILEINFO();
             // extract small icon
             {
-                NativeHelper.SHGetFileInfo(path, 0U, ref shinfo, (uint)Marshal.SizeOf<NativeHelper.SHFILEINFO>(),
+                NativeHelper.SHGetFileInfo(path, isDirectory ? NativeHelper.FILE_ATTRIBUTE_DIRECTORY : 0U, ref shinfo, (uint)Marshal.SizeOf<NativeHelper.SHFILEINFO>(),
                     NativeHelper.SHGFI_ICON | NativeHelper.SHGFI_SMALLICON);
 
                 if (shinfo.hIcon != IntPtr.Zero) {
@@ -37,7 +38,7 @@ namespace QuickDir {
 
             // extract large icon
             {
-                NativeHelper.SHGetFileInfo(path, 0U, ref shinfo, (uint)Marshal.SizeOf<NativeHelper.SHFILEINFO>(),
+                NativeHelper.SHGetFileInfo(path, isDirectory ? NativeHelper.FILE_ATTRIBUTE_DIRECTORY : 0U, ref shinfo, (uint)Marshal.SizeOf<NativeHelper.SHFILEINFO>(),
                     NativeHelper.SHGFI_ICON | NativeHelper.SHGFI_LARGEICON);
 
                 if (shinfo.hIcon != IntPtr.Zero) {

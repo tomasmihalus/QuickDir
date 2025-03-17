@@ -23,6 +23,8 @@ namespace QuickDir {
         public const uint SHGFI_LARGEICON = 0x0;
         public const uint SHGFI_SMALLICON = 0x1;
 
+        public const uint FILE_ATTRIBUTE_DIRECTORY = 0x10;
+
         [DllImport("user32", SetLastError = true)]
         [return: MarshalAs(UnmanagedType.Bool)]
         public static extern bool DestroyIcon(IntPtr hIcon);

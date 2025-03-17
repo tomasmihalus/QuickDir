@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -73,7 +74,7 @@ namespace QuickDir {
                         if (!Directory.Exists(line))
                             continue;
 
-                        QuickDirMenuItem item = new QuickDirMenuItem(line);
+                        QuickDirMenuItem item = new QuickDirMenuItem(line) { BackColor = Color.FromArgb(255, 64, 64, 64) };
                         items.Add(item);
                     }
                 }

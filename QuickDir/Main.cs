@@ -20,7 +20,11 @@ namespace QuickDir {
             Instances.Add(this);
             ThreadExit += Main_ThreadExit;
 
-            Icon.ContextMenuStrip = new QuickMenuStrip() { AutoClose = true };
+            Icon.ContextMenuStrip = new QuickMenuStrip() {
+                AutoClose = true,
+                Renderer = new ToolStripProfessionalRenderer(new QuickDirMenuColorTable())
+            };
+
             Icon.MouseClick += (sender, e) => {
                 if (e.Button != MouseButtons.Left)
                     return;

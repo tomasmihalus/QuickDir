@@ -20,7 +20,7 @@ namespace QuickDir {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
 
-            Localizer.SetLanguage("en_us");
+            //Localizer.SetLanguage("en_us");
             Application.Run(new Main());
         }
     }

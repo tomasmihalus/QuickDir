@@ -24,7 +24,18 @@ namespace QuickDir {
 
             IsDirectoryItem = isDirectory;
             ItemPath = Path.GetFullPath(path);
-            Text = Path.GetFileName(path); //isDirectory ? Path.GetFileName(path) : Path.GetFileNameWithoutExtension(path);
+
+            switch (Path.GetExtension(path)) {
+                case ".lnk":
+                    Text = Path.GetFileNameWithoutExtension(path);
+                    break;
+                case ".url":
+                    Text = Path.GetFileNameWithoutExtension(path);
+                    break;
+                default:
+                    Text = Path.GetFileName(path); //isDirectory ? Path.GetFileName(path) : Path.GetFileNameWithoutExtension(path);
+                    break;
+            }
 
             UpdateImage();
             UpdateItems(quickUpdate: true);
