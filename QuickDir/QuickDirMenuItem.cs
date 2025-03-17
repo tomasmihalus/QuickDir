@@ -52,7 +52,7 @@ namespace QuickDir {
             }
         }
 
-        private void UpdateImage() {
+        internal void UpdateImage() {
             Image?.Dispose();
 
             string path = ItemPath;
@@ -69,7 +69,7 @@ namespace QuickDir {
             }
         }
 
-        private void UpdateItems(bool quickUpdate) {
+        internal void UpdateItems(bool quickUpdate) {
             if (!IsDirectoryItem)
                 return;
 

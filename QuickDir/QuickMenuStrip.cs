@@ -49,12 +49,24 @@ namespace QuickDir {
             
             string configPath = QuickResources.UserConfigFile;
             if (File.Exists(configPath)) {
-                foreach (string line in File.ReadLines(configPath)) {
-                    if (!Directory.Exists(line))
-                        continue;
+                string[] lines = File.ReadAllLines(configPath);
+                if (lines.Length == 1) {
+                    string line = lines[0];
+                    if (Directory.Exists(line)) {
+                        QuickDirMenuItem item = new QuickDirMenuItem(line);
+                        item.UpdateItems(quickUpdate: false);
+                        ToolStripItem[] newItems = item.DropDownItems.Cast<ToolStripItem>().ToArray();
 
-                    QuickDirMenuItem item = new QuickDirMenuItem(line);
-                    items.Add(item);
+                        items.AddRange(newItems);
+                    }
+                } else if (lines.Length > 1) {
+                    foreach (string line in File.ReadLines(configPath)) {
+                        if (!Directory.Exists(line))
+                            continue;
+
+                        QuickDirMenuItem item = new QuickDirMenuItem(line);
+                        items.Add(item);
+                    }
                 }
             } else {
                 File.Create(configPath).Close();
