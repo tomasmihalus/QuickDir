@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace QuickDir {
     internal static class NativeHelper {
-        [StructLayout(LayoutKind.Sequential)]
+        [StructLayout(LayoutKind.Sequential, CharSet = CharSet.Unicode)]
         public struct SHFILEINFO {
             public IntPtr hIcon;
             public int iIcon;
@@ -27,7 +27,7 @@ namespace QuickDir {
         [return: MarshalAs(UnmanagedType.Bool)]
         public static extern bool DestroyIcon(IntPtr hIcon);
 
-        [DllImport("shell32", SetLastError = true)]
+        [DllImport("shell32", SetLastError = true, CharSet = CharSet.Unicode)]
         public static extern IntPtr SHGetFileInfo(string pszPath, uint dwFileAttributes, ref SHFILEINFO psfi, uint cbSizeFileInfo, uint uFlags);
     }
 }

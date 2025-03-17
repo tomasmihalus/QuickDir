@@ -51,8 +51,10 @@ namespace QuickDir {
             ToolStripItemCollection items = Items;
             items.Clear();
 
+#if DEBUG
             items.Add("+", null, AddQuickDirectory);
             items.Add(new ToolStripSeparator());
+#endif
             
             string configPath = QuickResources.UserConfigFile;
             if (File.Exists(configPath)) {
