@@ -12,6 +12,13 @@ namespace QuickDir {
             UpdateItems();
         }
 
+        protected override void OnItemClicked(ToolStripItemClickedEventArgs e) {
+            base.OnItemClicked(e);
+
+            if (e.ClickedItem is QuickDirMenuItem item)
+                item.OpenItem();
+        }
+
         private void AddQuickDirectory(object sender, EventArgs e) {
             FolderBrowserDialog dialog = new FolderBrowserDialog();
             if (dialog.ShowDialog() != DialogResult.OK)

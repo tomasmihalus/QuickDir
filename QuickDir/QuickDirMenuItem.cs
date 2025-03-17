@@ -45,10 +45,15 @@ namespace QuickDir {
         protected override void OnDropDownItemClicked(ToolStripItemClickedEventArgs e) {
             base.OnDropDownItemClicked(e);
 
-            if (!(e.ClickedItem is QuickDirMenuItem item) || item.IsDirectoryItem)
+            if (e.ClickedItem is QuickDirMenuItem item)
+                item.OpenItem();
+        }
+
+        internal void OpenItem(bool fileOnly = true) {
+            if (fileOnly && IsDirectoryItem)
                 return;
 
-            using (Process process = Process.Start("explorer", $"\"{item.ItemPath}\"")) {
+            using (Process process = Process.Start("explorer", $"\"{ItemPath}\"")) {
             }
         }
 
