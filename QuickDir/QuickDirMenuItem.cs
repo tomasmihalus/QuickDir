@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Shell32;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Drawing;
@@ -12,6 +13,10 @@ namespace QuickDir {
     public sealed class QuickDirMenuItem : ToolStripMenuItem {
         public bool IsDirectoryItem { get; }
         public string ItemPath { get; }
+
+        private static readonly string FolderIconOverridePathIco = Path.Combine("resources", "folder_override.ico");
+        private static readonly string FolderIconOverridePathPng = Path.Combine("resources", "folder_override.png");
+        private static readonly string FolderIconOverridePathJpg = Path.Combine("resources", "folder_override.jpg");
 
         public QuickDirMenuItem(string path) {
             if (path is null)
@@ -76,10 +81,21 @@ namespace QuickDir {
                 using (Icon icon = Icon.ExtractAssociatedIcon(path))
                     Image = icon.ToBitmap();
             } else if (Directory.Exists(path)) {
-                IconHelper.ExtractAssociatedIcons(path, out Bitmap small, out Bitmap large);
-                Image = small;
+                Image img;
+                if (File.Exists(FolderIconOverridePathIco)) {
+                    img = Image.FromFile(FolderIconOverridePathIco);
+                } else if (File.Exists(FolderIconOverridePathPng)) {
+                    img = Image.FromFile(FolderIconOverridePathPng);
+                } else if (File.Exists(FolderIconOverridePathJpg)) {
+                    img = Image.FromFile(FolderIconOverridePathJpg);
+                } else {
+                    IconHelper.ExtractAssociatedIcons(path, out Bitmap small, out Bitmap large);
 
-                large.Dispose();
+                    img = small;
+                    large.Dispose();
+                }
+
+                Image = img;
             } else {
                 Image = QuickResources.MissingFileIcon.ToBitmap();
             }
